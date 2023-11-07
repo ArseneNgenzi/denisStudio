@@ -1,0 +1,52 @@
+<div
+  class="bg-[url('https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2FDRo8CDUwkjWHmSF6AoC-Vw%252FThe_weather_project_111160.jpg&width=910')] bg-center w-full bg-no-repeat bg-cover"
+>
+  <!-- <p class="text-9xl p-8">CONTACT US</p> -->
+  <div class="bg-slate-400 bg-opacity-60 w-full text-center p-16">
+    <p class="text-4xl md:text-5xl lg:text-9xl font-bold">PAINTINGS</p>
+    <p class="md:text-xl lg:text-3xl py-4">
+      Get yourself the coolest paintings here!
+    </p>
+  </div>
+</div>
+<div class="px-4">
+  <div class="w-full flex border my-16 py-4">
+    <div class="w-1/3 flex justify-center">Categories</div>
+    <div class="w-1/3 flex justify-center">Search</div>
+    <div class="w-1/3 flex justify-center">Sort By</div>
+  </div>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4"
+  >
+    <div
+      *ngFor="let product of products"
+      class="hover:opacity-80 cursor-pointer py-4"
+      (click)="onProductClick(product)"
+      [ngClass]="product.inStock === 'no' ? 'opacity-70' : ''"
+    >
+      <img
+        src="{{ product.image }}"
+        alt=""
+        class="w-full sm:min-h-[400px] md:min-h-[300px] lg:min-h-[400px]"
+      />
+      <p>{{ product.name }}</p>
+      <div class="flex">
+        <p
+          [ngClass]="
+            product.inStock === 'no' ? 'line-through text-gray-400' : ''
+          "
+        >
+          ${{ product.currentPrice }}
+        </p>
+        <p
+          *ngIf="product.previousPrice && product.inStock === 'yes'"
+          class="line-through text-gray-400 ml-4"
+        >
+          ${{ product.previousPrice }}
+        </p>
+      </div>
+      <p *ngIf="product.inStock === 'no'">Sold Out</p>
+      <p *ngIf="product.inStock === 'yes'">In Stock</p>
+    </div>
+  </div>
+</div>

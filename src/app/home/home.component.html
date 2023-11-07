@@ -1,0 +1,92 @@
+<!-- <a routerLink="/product-details"> -->
+<div class="relative">
+  <!-- <div></div> -->
+  <img
+    src="https://www.pictoclub.com/wp-content/uploads/2021/09/painting-brushes-scaled.jpg"
+    alt=""
+    class="w-full h-[75vh] object-cover object-top"
+  />
+  <div
+    class="absolute top-[25vh]  mx-8 md:top-[30vh] lg:left-[10%] bg-sky-900 bg-opacity-75 p-16 rounded-xl shadow-2xl"
+  >
+    <p class="md:text-3xl lg:text-5xl text-white uppercase font-bold">
+      Welcome to Denis Studio
+    </p>
+  </div>
+  <div class="flex justify-center pt-8">
+    <button
+      class="flex items-center bg-sky-950 text-white px-10 py-4 rounded-md"
+      (click)="scrollToPaintings(target)"
+    >
+      <i-feather name="arrow-down" class="mr-2"></i-feather>
+      Go to paintings
+    </button>
+  </div>
+</div>
+<div class="px-4" >
+  <div class="pt-8" #target>
+    <div class="w-full flex flex-col  md:flex-row border my-16 py-4" >
+      <div class="w-full md:-1/3 flex justify-center">
+        <label for="" class="mr-4 text-gray-500 p-2">Filter by:</label>
+        <select [(ngModel)]="selectedCategory" (change)="ChangingCategory(selectedCategory)"  class="outline-none cursor-pointer rounded border-2 px-4 py-2 font-bold ">
+          <option value="{{defaultCategory}}" >{{defaultCategory}}</option>
+          <option *ngFor="let category of categories" >
+            {{category.name | titlecase}}
+          </option>
+        </select>
+      </div>
+      <div class="w-full md:w-1/3 flex justify-center">Search</div>
+      <div class="w-full md:w-1/3 flex justify-center">
+        <label for="" class="mr-4 text-gray-500 p-2">Sort by:</label>
+        <select [(ngModel)]="selectedSortValue" (change)="ChangingSortValue(selectedSortValue)" class="outline-none cursor-pointer rounded border-2 px-4 py-2 font-bold">
+          <!-- <option value="{{defaultCategory}}" >{{defaultCategory}}</option>
+          <option value="{{defaultCategory}}" >{{defaultCategory}}</option>
+          <option value="{{defaultCategory}}" >{{defaultCategory}}</option> -->
+          <option value="{{defaultSort}}" >{{defaultSort}}</option>
+          <option >Low to high price</option>
+          <option >High to low price</option>
+          <option >A-Z</option>
+          <option >Z-A</option>
+          <!-- <option *ngFor="let category of categories" >
+            {{category.name | titlecase}}
+          </option> -->
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4"
+  >
+    <div
+      *ngFor="let product of products"
+      class="hover:opacity-80 cursor-pointer py-4"
+      (click)="onProductClick(product)"
+      [ngClass]="product.inStock === 'no' ? 'opacity-70' : ''"
+    >
+      <img
+        src="{{ product.image }}"
+        alt=""
+        class="w-full sm:min-h-[400px] md:min-h-[300px] lg:min-h-[400px] object-cover"
+      />
+      <p>{{ product.name }}</p>
+      <div class="flex">
+        <p
+          [ngClass]="
+            product.inStock === 'no' ? 'line-through text-gray-400' : ''
+          "
+        >
+          ${{ product.currentPrice }}
+        </p>
+        <p
+          *ngIf="product.previousPrice && product.inStock === 'yes'"
+          class="line-through text-gray-400 ml-4"
+        >
+          ${{ product.previousPrice }}
+        </p>
+      </div>
+      <p *ngIf="product.inStock === 'no'">Sold Out</p>
+      <p *ngIf="product.inStock === 'yes'">In Stock</p>
+    </div>
+  </div>
+</div>
+<!-- </a> -->

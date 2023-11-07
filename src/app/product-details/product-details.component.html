@@ -1,0 +1,12 @@
+<div class="px-4">
+<div *ngIf="currentProduct">
+    <div *ngFor="let product of currentProduct">
+        <img src={{product.image}} alt="" class="h-[500px] w-[400px] overflow-hidden cursor-zoom-in object-cover" id="zoomable-image" (mousemove)="onMouseMove($event)">
+        <p>{{product.previousPrice}}</p>
+        <p>{{product.currentPrice}}</p>
+    </div>
+</div>
+<div class="mt-6">
+    <a routerLink="/home" class="bg-slate-500 text-white py-2 px-4 rounded ">Back to homepage</a>
+</div>
+</div>
