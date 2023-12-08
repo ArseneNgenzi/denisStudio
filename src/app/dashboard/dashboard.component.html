@@ -1,1 +1,31 @@
-<p>dashboard works!</p>
+<!-- <p>dashboard works!</p> -->
+
+<div class="flex justify-end bg-sky-50 pt-36 pr-10">
+  <button (click)="onLogout()" class="bg-sky-800 px-8 py-4 rounded text-white">Logout</button>
+</div>
+
+<div class="bg-sky-50">
+  <div class="flex justify-center items-center py-10 ">
+    <p class="text-xl md:text-2xl lg:text-4xl mt-16 uppercase font-bold">Dashboard</p>
+  </div>
+
+  <div class="h-[34vh] flex justify-center items-center">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="pb-8  text-sky-700">
+      <a
+        mat-tab-link
+        *ngFor="let link of links"
+        routerLink="{{ link.link }}"
+        (click)="activeLink = link.link"
+        [active]="activeLink == link.link"
+        
+      >
+        {{ link.name }} :
+        {{ link.name === "Products" ? products.length : categories.length }}
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  </div>
+
+  
+  <router-outlet></router-outlet>
+</div>

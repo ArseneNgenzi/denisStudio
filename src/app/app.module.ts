@@ -16,7 +16,18 @@ import { allIcons } from 'angular-feather/icons';
 import { PaintingsComponent } from './paintings/paintings.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { AuthGuard } from './auth/auth.guard';
+// import { SearchPipe } from './core/pipes/search.pipe';
+import { BackToTopComponent } from './back-to-top/back-to-top.component';
+import { ProductsManagementComponent } from './products-management/products-management.component';
+import { CategoriesManagementComponent } from './categories-management/categories-management.component';
+import { NgxImageMagnifierModule } from 'ngx-image-magnifier';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CreateProductComponent } from './products-management/create-product/create-product.component';
+import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component'
 
 @NgModule({
   declarations: [
@@ -30,19 +41,30 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     PaintingsComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    BackToTopComponent,
+    ProductsManagementComponent,
+    CategoriesManagementComponent,
+    CreateProductComponent,
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FeatherModule.pick(allIcons),
-    FormsModule
+    FormsModule,
+    NgxImageMagnifierModule,
+    MatDialogModule,
+    MatTabsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    FeatherModule
+    FeatherModule,
+    
   ],
-  providers: [],
+  // providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

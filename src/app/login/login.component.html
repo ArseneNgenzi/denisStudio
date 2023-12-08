@@ -1,0 +1,28 @@
+<div class="h-screen flex justify-center items-center bg-sky-50 p-6 md:p-0 ">
+    <div class="w-full sm:w-[60vw] lg:w-[35vw]  bg-white p-8 md:p-16 lg:mt-20 shadow-lg rounded-md">
+        <div class="flex flex-col items-center mb-10">
+            <p class="text-4xl uppercase font-bold text-sky-800">Welcome</p>
+            <p class="text-gray-600 text-lg border-b-2 border-sky-800 relative w-[8rem] h-[2rem]">
+                <span class="absolute bg-white left-8 -bottom-3 px-2">Login</span>
+            </p>
+        </div>
+
+        <div class="">
+            <form [formGroup]="loginForm" class="w-full flex flex-col items-center" (ngSubmit)="onCredentialsSubmit()">
+                <div class="w-full mb-8">
+                    <input type="text" placeholder="Username..." class="w-full px-4 py-6 outline-none  text-lg border-b-2 border-sky-100" formControlName="username">
+                </div>
+                <div class="w-full border-b-2 border-sky-100 flex items-center ">
+                    <input [type]="showPassword ? 'text' : 'password' " placeholder="Password..." class="w-full px-4 py-6 outline-none  text-lg " formControlName="password">
+                    <span class="flex cursor-pointer bg-transparent">
+                        <i-feather name="eye" class="text-gray-500 iconSize" *ngIf="!showPassword" (click) ="switchShowPassword(true)" ></i-feather>
+                        <i-feather name="eye-off" class="text-gray-500 iconSize" *ngIf="showPassword" (click) ="switchShowPassword(false)"></i-feather>
+                    </span>
+                </div>
+                <div>
+                    <input type="submit" value="Login" class="mt-16 bg-sky-800 text-white px-8 py-4 rounded border-0 cursor-pointer" >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

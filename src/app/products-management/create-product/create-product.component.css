@@ -1,0 +1,4 @@
+div:has(> input.ng-invalid.ng-touched), div:has(> textarea.ng-invalid.ng-touched), div:has(> select.ng-invalid.ng-touched) {
+    border-bottom: 2px solid red;
+}
+

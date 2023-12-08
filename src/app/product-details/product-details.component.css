@@ -1,8 +1,4 @@
-#zoomable-image {
-    transition: transform 0.5s; /* Add a smooth transition effect */
-    cursor: zoom-in; /* Change the cursor to indicate zoom functionality */
-  }
-
-  .zoomed {
-    transform: scale(2); /* Adjust the zoom level as needed */
-  }
+.imageSize {
+    width: 100%;
+    height: 500px;
+}

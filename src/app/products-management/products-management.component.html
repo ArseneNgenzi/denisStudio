@@ -1,0 +1,28 @@
+<div class="px-4 pb-20 bg-sky-50">
+    <div class=" flex justify-center mt-8">
+        <p class="text-gray-700 font-bold capitalize">Manage your products here!</p>
+    </div>
+    <div class="text-center sm:text-right" >
+            <button class="bg-sky-800 px-10 py-3 text-white rounded mx-4 mt-8" (click)="toggleProductModal()" >New Product</button>
+        </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        
+        <div *ngFor="let product of products; let i = index" class=" mt-8 shadow-2xl rounded p-4 h-[30rem] relative  w-full " (mouseover)="showbtns(i)" (mouseleave)="showbtns(i)">
+            <div class=" h-[80%]">
+                <img src={{product.image}} class=" h-full  object-cover rounded w-full">
+            </div>
+            <div class="h-fit bg-red- flex flex-col mt-4">
+                <p> <span class="font-bold">Title:</span> {{product.title}}</p>
+                <p><span class="font-bold">Price:</span> {{product.currentPrice | currency}}</p>
+                <p><span class="font-bold">Category:</span> {{product.category}}</p>
+            </div>
+            <div class="flex justify-center items-center absolute top-[30%] right-0 left-0  m-8 p-4 bg-opacity-80 bg-sky- rounded " *ngIf="onProductHover == i">
+                <div class="flex justify-center items-center">
+                        <button class="bg-orange-700 px-6 py-3 text-white rounded " (click)="toggleProductModal(product)">Edit</button>
+                        <button class="bg-red-900 px-6 py-3 text-white rounded ml-4 " (click)="deleteProduct(product)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<mat-dialog-content class="h-full">
+    <!-- <div class="flex items-center">
+        <p class="text- text-gray-300">
+            <span class="text-red-500 ml-2 text-lg">*</span> means "Required field"
+        </p>
+    </div> -->
+  <div class="flex justify-between items-center px-4">
+    <h1 class="text-lg font-semibold pt-7 text-sky-800 uppercase">
+      {{ data?.id ? "Update Product" : "Create Product" }}
+    </h1>
+    <div class="pt-7 sm:block">
+      <button
+        type="button"
+        class="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-800 focus:ring-offset-2"
+        (click)="close()"
+      >
+        <span class="sr-only">Close</span>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="m-auto items-center my-6 w-full px-4">
+    <form [formGroup]="productForm" class="" (ngSubmit)="onProductSubmit">
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+        >Title:<span class="text-red-500 ml-2">*</span> </label
+      >
+        <input
+          formControlName="title"
+          type="text"
+          placeholder="Product title..."
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+        />
+      </div>
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+        >Link:<span class="text-red-500 ml-2">*</span> </label
+      >
+        <input
+        formControlName="image"
+          type="text"
+          placeholder="Image link..."
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+        />
+      </div>
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+        >Current__Price:<span class="text-red-500 ml-2">*</span> </label
+      >
+        <input
+        formControlName="currentPrice"
+          type="text"
+          placeholder="Product price..."
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+        />
+      </div>
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+        >Previous__Price: </label
+      >
+        <input
+        formControlName="previousPrice"
+          type="text"
+          placeholder="Previous price... (Optional)"
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+        />
+      </div>
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+        >Size:<span class="text-red-500 ml-2">*</span> </label
+      >
+        <input
+        formControlName="size"
+          type="text"
+          placeholder="Size in inches..."
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+        />
+      </div>
+      <div class="flex items-center border-b-2 mb-6">
+        <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 "
+        >Stock:<span class="text-red-500 ml-2">*</span> </label
+      >
+        <input
+        formControlName="itemsNumber"
+          type="text"
+          placeholder="Stock count..."
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6"
+        />
+      </div>
+
+      <div class="">
+        <div class="flex items-center border-b-2 mb-6">
+          <label class=" text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+            >Category:<span class="text-red-500 ml-2">*</span> </label
+          >
+          <select
+          formControlName="category"
+            (change)="ChangingCategory(selectedCategory)"
+            class="w-full  py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 cursor-pointer"
+          >
+            <option *ngFor="let category of categories">
+              {{ category.name  }}
+            </option>
+          </select>
+        </div>
+
+        <div class="flex items-center border-b-2">
+          <label class="text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+            >In__stock?<span class="text-red-500 ml-2">*</span> </label
+          >
+
+          <select
+          formControlName="inStock"
+            (change)="ChangingStockStatus(selectedStockStatus)"
+            class="w-full  py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 cursor-pointer"
+          >
+            <option value="yes" class="p-6">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-8  border-b-2 mb-6">
+        <label class="text-sm font-bold leading-6 text-gray-600 mr-4 flex"
+            >Description:<span class="text-red-500 ml-2">*</span>  </label
+          >
+        <textarea
+        formControlName="description"
+          class="w-full py-2.5 text-gray-500 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-sky-50"
+          rows="3"
+          placeholder="Product description..."
+        ></textarea>
+      </div>
+    </form>
+    <div class="flex justify-end items-center">
+        <button
+        class="px-4 py-2.5 text-white bg-sky-800 rounded  text-sm mr-4"
+        (click)="onProductSubmit()"
+      >
+        {{ data?.id ? "Update" : "Create" }}
+      </button>
+
+      <button
+        (click)="close()"
+        class="px-4 py-2.5  rounded bg-white font-semibold text-sm"
+      >
+        Cancel
+      </button>
+     
+    </div>
+  </div>
+</mat-dialog-content>

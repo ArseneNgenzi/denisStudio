@@ -1,12 +1,140 @@
-<div class="px-4">
-<div *ngIf="currentProduct">
-    <div *ngFor="let product of currentProduct">
-        <img src={{product.image}} alt="" class="h-[500px] w-[400px] overflow-hidden cursor-zoom-in object-cover" id="zoomable-image" (mousemove)="onMouseMove($event)">
-        <p>{{product.previousPrice}}</p>
-        <p>{{product.currentPrice}}</p>
+<div class="px-4 bg-sky-100">
+  <div class="py-20 pt-32">
+    <a
+      routerLink="/home"
+      class="text-sky-700 py-2 px-4 font-bold capitalize flex items-center"
+    >
+      <i-feather name="arrow-left" class="mr-1"></i-feather>
+      Home</a
+    >
+  </div>
+  <div *ngIf="currentProduct" class="h-full pb-20">
+    <div
+      *ngFor="let product of currentProduct"
+      class="bg-white shadow-lg lg:w-[50%] w-full mx-auto flex items-center flex-col "
+    >
+      <div class="p-4">
+        <ngx-image-magnifier
+          [image]="product.image"
+          [width]="700"
+          [lensWidth]="250"
+          class="rounded-md "
+        >
+        </ngx-image-magnifier>
+      </div>
+      <div class="w-full lg:w-[67%] p-4 sm:p-5 md:p-14 lg:p-4 flex flex-col justify-around">
+        <div class="mb-4 ">
+          <p class="text-2xl font-bold capitalize">{{ product.title |uppercase }}</p>
+          <p class="text-gray-600 text-sm">
+            Availability:
+            <span
+              class="text-xs font-bold"
+              [ngClass]="
+                product.inStock === 'no' ? 'text-red-700' : 'text-green-700'
+              "
+            >
+              {{ product.inStock === "no" ? "Sold Out" : "In Stock" }}</span
+            >
+          </p>
+        </div>
+        <div class="mb-4 ">
+          <p class="text-sky-800 text-lg md:text-2xl">
+            <span class="text-black font-bold">Price: </span>{{ product.currentPrice | currency }}
+          </p>
+        </div>
+        <div class="mb-4">
+          <p class="capitalize text-lg text-gray-700">
+            {{ product.description }} 
+            <!-- {{ product.description }} {{ product.description }}
+            {{ product.description }} {{ product.description }} -->
+          </p>
+        </div>
+
+        <div class="mb-4 ">
+          <p class="text-xl text-sky-800 underline font-bold mb-3">Details</p>
+          <ul>
+            <li><span class="font-bold">Size:</span> {{ product.size }}</li>
+            <li>
+              <span class="font-bold">Category: </span>
+              {{ product.category | titlecase }}
+            </li>
+            <li>
+              <span class="font-bold">Items in stock: </span>
+              {{ product.itemsNumber }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb-8">
+          <button
+            [disabled]="product.inStock === 'no'"
+            (click)="showForm()"
+            [ngClass]="
+              product.inStock === 'no'
+                ? 'opacity-50 hover:cursor-not-allowed'
+                : ''
+            "
+            class="bg-sky-800 text-white py-4 px-8 rounded-md"
+          >
+            Place Order
+          </button>
+        </div>
+      </div>
     </div>
-</div>
-<div class="mt-6">
-    <a routerLink="/home" class="bg-slate-500 text-white py-2 px-4 rounded ">Back to homepage</a>
-</div>
+
+    <div class="mt-28 w-full lg:w-[50%] mx-auto pb-28 relative" *ngIf="showOrderForm">
+      <p  *ngIf="showNotification" class="bg-green-700 text-white left-[20%] sm:left-[37%] p-3 rounded absolute -top-16">Order placed successfully!</p>
+      <div class="mx-auto pt-10 bg-white rounded-t-md flex justify-center">
+        <p class="uppercase text-gray-700 md:text-xl font-bold">
+          Fill this form, we will reach out in no time!
+        </p>
+      </div>
+      <div class="w-full">
+        <form class="w-full mx-auto py-10 px-4 bg-white rounded-b-md" [formGroup]="orderForm" (ngSubmit)="onOrderSubmit()">
+          <div class="md:w-2/3 my-6 mx-auto">
+            <input
+            formControlName="names"
+              type="text"
+              placeholder="Full names..."
+              class="w-full p-4 outline-none border-b-2"
+            />
+          </div>
+          <div class="md:w-2/3 my-6 mx-auto">
+            <input
+            formControlName="email"
+              type="email"
+              placeholder="Email..."
+              class="w-full p-4 outline-none border-b-2"
+            />
+          </div>
+          <div class="md:w-2/3 my-6 mx-auto">
+            <input
+            formControlName="phone"
+              type="tel"
+              placeholder="Phone..."
+              class="w-full p-4 outline-none border-b-2"
+            />
+          </div>
+          <div class="md:w-2/3 my-6 mx-auto">
+            <textarea
+            formControlName="message"
+              rows="7"
+              placeholder="Message... (Optional)"
+              class="w-full p-4 outline-none border-b-2 bg-sky-50"
+            ></textarea>
+          </div>
+          <div class="flex justify-center">
+            <input  type="submit" class="bg-sky-800 text-white px-8 py-4 rounded-md" value="Send" [disabled]="orderForm.invalid">
+              
+            <button
+              (click)="hideForm()"
+              class="text-gray-700 px-8 py-4 rounded-md"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

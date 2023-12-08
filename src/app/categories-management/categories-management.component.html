@@ -1,0 +1,30 @@
+<div class="pb-20 flex flex-col justify-center items-center px-4">
+  <div class="flex items-center bg-white w-full lg:w-1/3 pr-6 rounded-md">
+    <input
+      type="text"
+      [(ngModel)]="currentCategory"
+      placeholder="Add new category..."
+      class="py-4 px-6 flex-1 outline-none"
+    />
+    <button class="flex items-center" (click)="createCategory()">
+      <i-feather name="plus-circle" class="text-sky-700"></i-feather>
+    </button>
+  </div>
+  <div class="mt-8 w-full lg:w-1/3">
+    <div *ngFor="let category of categories; let i = index">
+      <div class="flex items-center">
+        <p class="flex-1 lg:text-xl">
+          {{ i + 1 }}. {{ category.name | titlecase }}
+        </p>
+        <div>
+          <button class="mr-2 my-2" (click)="editCategory(category)">
+            <i-feather name="edit-2" class="text-sky-800"></i-feather>
+          </button>
+          <button class="my-2" (click)="deleteCategory(category.id)">
+            <i-feather name="trash-2" class="text-red-500"></i-feather>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

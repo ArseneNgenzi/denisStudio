@@ -4,3 +4,8 @@
 @tailwind utilities;
 
 /* @import '~ngx-owl-carousel-o/lib/styles/prebuilt-themes/default.scss'; */
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif}
+.notfoundbgimage{
+    background-image: url('./assets/404error1.png');
+  }
